@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/item_MainMenu"
+            android:title="@string/MainMenu"
+            app:showAsAction="never">
+        </item>
+        <item
+            android:id="@+id/item_shopping_cart"
+            android:icon="@drawable/ic_baseline_shopping_cart_24"
+            android:iconTint="@color/black"
+            android:title="@string/cart"
+            android:tooltipText="1"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/item_logout"
+            android:title="@string/logout"
+            app:showAsAction="never">
+
+        </item>
+    </group>
+
+</menu>

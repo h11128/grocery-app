@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ui.PaymenActivity">
+
+    <include layout="@layout/tool_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/line_payment_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_general"
+        app:layout_constraintBottom_toTopOf="@id/order_info"
+        android:layout_margin="20dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_confirm_payment"
+            android:text="confirm order"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/colorPrimaryDark">
+        </Button>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/order_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:padding="8dp"
+        android:background="@drawable/shape_frame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line_payment_all">
+
+        <TextView
+            android:id="@+id/text_shipping_to"
+            style="@style/CustomText1"
+            android:text="Shipping to"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_order_delivery"
+            style="@style/CustomText1"
+            android:text="Delivery to"
+            app:layout_constraintTop_toBottomOf="@id/text_shipping_to"
+            app:layout_constraintStart_toStartOf="parent"
+             />
+        <View
+            android:id="@+id/view_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/primaryGreyLightColor"
+            app:layout_constraintTop_toBottomOf="@id/text_order_delivery"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp">
+
+        </View>
+
+        <TextView
+            android:id="@+id/text_item_count"
+            style="@style/CustomText1"
+            android:text="Items"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_divider" />
+
+        <TextView
+            android:id="@+id/text_items"
+            style="@style/CustomText1"
+            android:text="ItemPrice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_divider"  />
+
+        <TextView
+            style="@style/CustomText1"
+            android:text="Shipping &amp; handling"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_items" />
+
+        <TextView
+            android:id="@+id/text_order_shipping"
+            style="@style/CustomText1"
+            android:text="discount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_items" />
+
+        <TextView
+            style="@style/CustomText1"
+            android:text="Promotion Applied"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_order_shipping" />
+
+        <TextView
+            android:id="@+id/text_order_promotion"
+            style="@style/CustomText1"
+            android:text="discount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_order_shipping" />
+
+        <TextView
+            style="@style/CustomText1"
+            android:text="Total before tax"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_order_promotion" />
+
+        <TextView
+            android:id="@+id/text_order_beforetax"
+            style="@style/CustomText1"
+            android:text="discount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_order_promotion" />
+
+        <TextView
+            style="@style/CustomText1"
+            android:text="Estimated tax"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_order_beforetax" />
+
+        <TextView
+            android:id="@+id/text_order_tax"
+            style="@style/CustomText1"
+            android:text="discount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_order_beforetax" />
+
+        <TextView
+            style="@style/CustomText"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Order Total"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_order_tax" />
+
+        <TextView
+            android:id="@+id/text_order_total"
+            style="@style/CustomText"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/darkRed"
+            android:text="discount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_order_tax" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
