@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -21,10 +23,12 @@ import com.google.gson.Gson
 import com.jason.grocery.R
 import com.jason.grocery.adapter.RecyclerAdapterMain
 import com.jason.grocery.adapter.ViewPagerAdapterMain
+import com.jason.grocery.data.DBHelper
 import com.jason.grocery.model.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.nav_header.view.*
+import kotlinx.android.synthetic.main.relative_tool_cart.view.*
 import kotlinx.android.synthetic.main.tool_bar.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +39,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var sessionManager:SessionManager
     private lateinit var drawerLayout: DrawerLayout
     private val catUrl = url_cate
+    private var textView_inside_cart: TextView? = null
+    private lateinit var dbHelper: DBHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -64,7 +71,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
-
+        dbHelper = DBHelper(this)
         Log.d("abc", "itemcount ${viewPagerAdapter.itemCount}")
     }
 
@@ -94,8 +101,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        val view = menu.findItem(R.id.item_shopping_cart).actionView
+        view.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            startActivityForResult(intent, 0)
+        }
+        textView_inside_cart = view.text_inside_cart
+        updateQuantity()
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -156,5 +170,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
 
+    }
+    fun updateQuantity() {
+        val total_count = dbHelper.countAll()
+        Log.d("abc", "total count in $total_count")
+        if (total_count <= 0){
+            textView_inside_cart?.visibility = View.GONE
+
+        }
+        else{
+            textView_inside_cart?.visibility = View.VISIBLE
+            textView_inside_cart?.text = total_count.toString()
+        }
     }
 }

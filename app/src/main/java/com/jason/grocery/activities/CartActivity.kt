@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -24,6 +25,7 @@ import com.jason.grocery.data.Data3simple
 import com.jason.grocery.model.*
 import kotlinx.android.synthetic.main.activity_cart.*
 import kotlinx.android.synthetic.main.relative_add_cart.*
+import kotlinx.android.synthetic.main.relative_tool_cart.view.*
 import kotlinx.android.synthetic.main.tool_bar.*
 
 
@@ -34,6 +36,8 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
     private var cartStatus = true
     private var subTotal = 0.0
     private lateinit var orderSummary: OrderSummary
+    private var textView_inside_cart: TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
@@ -116,8 +120,11 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
         super.onBackPressed()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        val view = menu.findItem(R.id.item_shopping_cart).actionView
+        textView_inside_cart = view.text_inside_cart
+        updateQuantity()
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -193,6 +200,7 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
 
     private fun switchItemUI(newStatus: Boolean){
         Log.d("abc", "switch UI $newStatus")
+
         if (newStatus != cartStatus){
             if(newStatus){
                 recycler_view_cart.visibility = View.VISIBLE
@@ -207,6 +215,19 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
                 text_no_item_in_cart.visibility = View.VISIBLE
             }
             cartStatus = newStatus
+        }
+        updateQuantity()
+    }
+    private fun updateQuantity() {
+        val total_count = dbHelper.countAll()
+        Log.d("abc", "total count in $total_count")
+        if (total_count <= 0){
+            textView_inside_cart?.visibility = View.GONE
+
+        }
+        else{
+            textView_inside_cart?.visibility = View.VISIBLE
+            textView_inside_cart?.text = total_count.toString()
         }
     }
 }

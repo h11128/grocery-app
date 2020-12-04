@@ -234,6 +234,24 @@ class DBHelper(var context: Context) :
         return result
     }
 
+    fun countAll(): Int {
+        val db = readableDatabase
+        val projection = null
+        val sortOrder = "$COLUMN_NAME_CATID ASC"
+        var result: Int = 0
+        val cursor =
+            db.query(DATABASE_new_TABLE_NAME, projection, null, null, null, null, sortOrder)
+        with(cursor) {
+            while (moveToNext()) {
+                val quantity = getInt(getColumnIndexOrThrow(COLUMN_NAME_QUANTITY))
+                if (quantity > 0){
+                    result += quantity
+                }
+            }
+        }
+        return result
+    }
+
     fun delete(product: Data3simple): Int {
         val db = writableDatabase
         val selection = "$COLUMN_NAME_NAME LIKE ?"

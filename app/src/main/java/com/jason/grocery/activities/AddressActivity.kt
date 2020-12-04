@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
@@ -21,10 +23,12 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.jason.grocery.R
 import com.jason.grocery.adapter.ViewPagerAdapterAddress
+import com.jason.grocery.data.DBHelper
 import com.jason.grocery.fragment.AddressListFragment
 import com.jason.grocery.fragment.EditAddressFragment
 import com.jason.grocery.model.*
 import kotlinx.android.synthetic.main.activity_address.*
+import kotlinx.android.synthetic.main.relative_tool_cart.view.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -34,6 +38,9 @@ class AddressActivity : AppCompatActivity(), EditAddressFragment.passAddress {
     private lateinit var orderSummary: OrderSummary
     private lateinit var sessionManager: SessionManager
     private lateinit var queue: RequestQueue
+    private lateinit var dbHelper: DBHelper
+    private var textView_inside_cart: TextView? = null
+
     var addressList: ArrayList<Address> = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +48,7 @@ class AddressActivity : AppCompatActivity(), EditAddressFragment.passAddress {
         orderSummary = intent.getSerializableExtra(KEY_OrderSummary) as OrderSummary
         Log.d("abc", "get orderSummary $orderSummary from intent")
         sessionManager = SessionManager(this)
+        dbHelper = DBHelper(this)
 
         init()
     }
@@ -70,9 +78,29 @@ class AddressActivity : AppCompatActivity(), EditAddressFragment.passAddress {
         super.onBackPressed()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        val view = menu.findItem(R.id.item_shopping_cart).actionView
+        view.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            startActivityForResult(intent, 0)
+        }
+        textView_inside_cart = view.text_inside_cart
+        updateQuantity()
         return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun updateQuantity() {
+        val total_count = dbHelper.countAll()
+        Log.d("abc", "total count in $total_count")
+        if (total_count <= 0){
+            textView_inside_cart?.visibility = View.GONE
+
+        }
+        else{
+            textView_inside_cart?.visibility = View.VISIBLE
+            textView_inside_cart?.text = total_count.toString()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

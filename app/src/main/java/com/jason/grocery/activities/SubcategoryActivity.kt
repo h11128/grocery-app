@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.android.volley.Request
@@ -15,11 +17,14 @@ import com.google.gson.Gson
 import com.jason.grocery.R
 import com.jason.grocery.adapter.RecyclerAdapterCart
 import com.jason.grocery.adapter.ViewPagerAdapterSub
+import com.jason.grocery.data.DBHelper
+import com.jason.grocery.fragment.SubFragment
 import com.jason.grocery.model.*
 import kotlinx.android.synthetic.main.activity_subcat.*
+import kotlinx.android.synthetic.main.relative_tool_cart.view.*
 import kotlinx.android.synthetic.main.tool_bar.*
 
-class SubcategoryActivity : AppCompatActivity() {
+class SubcategoryActivity : AppCompatActivity(), SubFragment.QuantityCallBack {
     private var catId = 0
     private lateinit var queue: RequestQueue
     private lateinit var subcategory: SubCategory
@@ -28,6 +33,8 @@ class SubcategoryActivity : AppCompatActivity() {
     private lateinit var subAdapter: ViewPagerAdapterSub
     private var subList: ArrayList<Data2> = arrayListOf()
     private var counter = 0
+    private var textView_inside_cart: TextView? = null
+    private lateinit var dbHelper: DBHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subcat)
@@ -83,8 +90,15 @@ class SubcategoryActivity : AppCompatActivity() {
         super.onBackPressed()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        val view = menu.findItem(R.id.item_shopping_cart).actionView
+        view.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            startActivityForResult(intent, 0)
+        }
+        textView_inside_cart = view.text_inside_cart
+        updateQuantity()
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -103,6 +117,7 @@ class SubcategoryActivity : AppCompatActivity() {
         view_pager_sub.adapter = subAdapter
 
         getSub(catId)
+        dbHelper = DBHelper(this)
 
 
     }
@@ -129,5 +144,19 @@ class SubcategoryActivity : AppCompatActivity() {
         })
         queue.add(catRequest)
     }
+
+    override fun updateQuantity() {
+        val total_count = dbHelper.countAll()
+        Log.d("abc", "total count in $total_count")
+        if (total_count <= 0){
+            textView_inside_cart?.visibility = View.GONE
+
+        }
+        else{
+            textView_inside_cart?.visibility = View.VISIBLE
+            textView_inside_cart?.text = total_count.toString()
+        }
+    }
+
 
 }

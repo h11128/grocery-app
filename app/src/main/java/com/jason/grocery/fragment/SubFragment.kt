@@ -17,6 +17,7 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.jason.grocery.R
 import com.jason.grocery.activities.ProductActivity
+import com.jason.grocery.activities.SubcategoryActivity
 import com.jason.grocery.adapter.RecyclerAdapterSub
 import com.jason.grocery.data.DBHelper
 import com.jason.grocery.data.Data3simple
@@ -32,6 +33,7 @@ class SubFragment : Fragment(), RecyclerAdapterSub.Callback {
     lateinit var dbHelper: DBHelper
     lateinit var adapter: RecyclerAdapterSub
     lateinit var recyclerView: RecyclerView
+    private var quantityCallBack: QuantityCallBack? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +58,7 @@ class SubFragment : Fragment(), RecyclerAdapterSub.Callback {
         super.onAttach(context)
         init()
         dbHelper = DBHelper(context)
+        quantityCallBack = activity as SubcategoryActivity
     }
 
     private fun getSub() {
@@ -93,11 +96,16 @@ class SubFragment : Fragment(), RecyclerAdapterSub.Callback {
     }
 
     override fun changeQuantity(data: Data3simple, operation: Int): Data3simple? {
+        quantityCallBack?.updateQuantity()
         return if (operation == 0){
             dbHelper.read(data)
         } else{
             dbHelper.changeQuantity(data, operation)
         }
+    }
+
+    interface QuantityCallBack{
+        fun updateQuantity()
     }
 
     override fun insertItem(data: Data3): Data3simple? {

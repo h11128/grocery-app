@@ -11,6 +11,7 @@ import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -21,6 +22,7 @@ import com.jason.grocery.model.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_product.*
 import kotlinx.android.synthetic.main.relative_add_cart.*
+import kotlinx.android.synthetic.main.relative_tool_cart.view.*
 
 
 class ProductActivity : AppCompatActivity() {
@@ -28,6 +30,7 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var myToast: Toast
     private lateinit var productData: Data3
     private var simpleData: Data3simple? = null
+    private var textView_inside_cart: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
@@ -70,8 +73,15 @@ class ProductActivity : AppCompatActivity() {
         super.onBackPressed()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        val view = menu.findItem(R.id.item_shopping_cart).actionView
+        view.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            startActivityForResult(intent, 0)
+        }
+        textView_inside_cart = view.text_inside_cart
+        updateQuantity()
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -173,7 +183,6 @@ class ProductActivity : AppCompatActivity() {
             button_add_quantity.visibility = View.VISIBLE
             button_minus_quantity.visibility = View.VISIBLE
             text_Inside.visibility = View.VISIBLE
-
         }
         else{
             button_add_cart.visibility = View.VISIBLE
@@ -182,9 +191,21 @@ class ProductActivity : AppCompatActivity() {
             text_Inside.visibility = View.GONE
         }
         text_Inside.text = simpleData?.quantity.toString()
+        updateQuantity()
 
 
     }
+    fun updateQuantity() {
+        val total_count = dbHelper.countAll()
+        Log.d("abc", "total count in $total_count")
+        if (total_count <= 0){
+            textView_inside_cart?.visibility = View.GONE
 
+        }
+        else{
+            textView_inside_cart?.visibility = View.VISIBLE
+            textView_inside_cart?.text = total_count.toString()
+        }
+    }
 
 }
