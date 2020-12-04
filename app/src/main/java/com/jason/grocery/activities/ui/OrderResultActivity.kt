@@ -1,16 +1,14 @@
 package com.jason.grocery.activities.ui
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.android.volley.ParseError
 import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
@@ -21,8 +19,8 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 class OrderResultActivity : AppCompatActivity() {
-    var orderList = arrayListOf<Order>()
-    var orderStatus = false
+    private var orderList = arrayListOf<Order>()
+    private var orderStatus = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_result)

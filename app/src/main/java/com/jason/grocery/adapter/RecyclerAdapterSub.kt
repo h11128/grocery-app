@@ -1,7 +1,6 @@
 package com.jason.grocery.adapter
 
 import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.Typeface
 import android.text.SpannableString
 import android.text.Spanned
@@ -20,18 +19,16 @@ import com.jason.grocery.model.Data3
 import com.jason.grocery.model.getImageUrl
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recycler_adapter_product2.view.*
-import kotlinx.android.synthetic.main.relative_add_cart.*
 import kotlinx.android.synthetic.main.relative_add_cart.view.*
 
 
 class RecyclerAdapterSub(
     private var mContext: Callback,
-    var mList: ArrayList<Data3>,
+    private var mList: ArrayList<Data3>,
 
     ) :
     RecyclerView.Adapter<RecyclerAdapterSub.MyViewHolder>() {
     private var callback: Callback? = null
-    private var mList1: ArrayList<Data3simple> = arrayListOf()
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(data: Data3) {
@@ -48,7 +45,7 @@ class RecyclerAdapterSub(
             ss2.setSpan(RelativeSizeSpan(0.8f), index1, ss2.length, 0)
             itemView.text_product2_mrp_price.text = ss2
 
-            itemView.text_prodcut2_price.text = priText
+            itemView.text_product2_price.text = priText
 
             itemView.button_add_cart.setOnClickListener {
                 callback?.insertItem(data)
@@ -118,7 +115,7 @@ class RecyclerAdapterSub(
     private fun switchCartUI(simpleData: Data3simple?, newStatus: Boolean, itemView: View) {
         Log.d(
             "abc",
-            "swtich Cart UI for product ${simpleData?.productName} to $newStatus with quantity ${simpleData?.quantity}"
+            "switch Cart UI for product ${simpleData?.productName} to $newStatus with quantity ${simpleData?.quantity}"
         )
         if (newStatus) {
             itemView.button_add_cart.visibility = View.GONE

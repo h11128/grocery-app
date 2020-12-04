@@ -67,7 +67,7 @@
         >
 
         <TextView
-            android:id="@+id/text_prodcut2_price"
+            android:id="@+id/text_product2_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"

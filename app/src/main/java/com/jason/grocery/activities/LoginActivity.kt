@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
-    lateinit var sessionManager: SessionManager
+    private lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -32,9 +32,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun init() {
         button_login.setOnClickListener {
-            val input_username = edit_login_user.text.toString()
-            val input_password = edit_login_password.text.toString()
-            loginOnline(input_username, input_password)
+            val inputUsername = edit_login_user.text.toString()
+            val inputPassword = edit_login_password.text.toString()
+            loginOnline(inputUsername, inputPassword)
 
         }
         button_register.setOnClickListener {

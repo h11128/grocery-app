@@ -44,7 +44,7 @@ class DBHelper(var context: Context) :
         const val DATABASE_NAME = "product_database"
         private const val DATABASE_TABLE_NAME = "product"
         var DATABASE_new_TABLE_NAME = "product"
-        private const val COLUMN_NAME_CATID = "catId"
+        private const val COLUMN_NAME_CatId = "catId"
         private const val COLUMN_NAME_NAME = "productName"
         private const val COLUMN_NAME_Image = "image"
         private const val COLUMN_NAME_QUANTITY = "quantity"
@@ -52,9 +52,7 @@ class DBHelper(var context: Context) :
 
         private const val SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS $DATABASE_TABLE_NAME"
         val SQL_CREATE_ENTRIES =
-            "CREATE TABLE IF NOT EXISTS $DATABASE_new_TABLE_NAME ($COLUMN_NAME_CATID INTEGER,$COLUMN_NAME_NAME TEXT,$COLUMN_NAME_Image TEXT,$COLUMN_NAME_QUANTITY INTEGER,$COLUMN_NAME_Price TEXT)"
-        var SQL_CREATE_NEW_TABLE_ENTRIES =
-            "CREATE TABLE IF NOT EXISTS $DATABASE_new_TABLE_NAME ($COLUMN_NAME_CATID INTEGER,$COLUMN_NAME_NAME TEXT,$COLUMN_NAME_Image TEXT,$COLUMN_NAME_QUANTITY INTEGER,$COLUMN_NAME_Price TEXT)"
+            "CREATE TABLE IF NOT EXISTS $DATABASE_new_TABLE_NAME ($COLUMN_NAME_CatId INTEGER,$COLUMN_NAME_NAME TEXT,$COLUMN_NAME_Image TEXT,$COLUMN_NAME_QUANTITY INTEGER,$COLUMN_NAME_Price TEXT)"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -83,26 +81,17 @@ class DBHelper(var context: Context) :
 
     }
 
-    fun createNewTable(newTableName: String) {
-        val db = writableDatabase
-        DATABASE_new_TABLE_NAME = newTableName
-        try {
-            db.execSQL(SQL_CREATE_NEW_TABLE_ENTRIES)
-            Log.d("database", "table $DATABASE_new_TABLE_NAME create successfully")
-            onUpgrade(db, DATABASE_VERSION, DATABASE_VERSION + 1)
-        } catch (e: Exception) {
-            Log.d("database", "table $DATABASE_new_TABLE_NAME create fail error $e")
-        }
 
 
-    }
 
-    fun insert(product: Data3simple): Long {
+
+
+    private fun insert(product: Data3simple): Long {
         val db = writableDatabase
         Log.d("data", "insert data ${product.catId}")
 
         val data = ContentValues().apply {
-            put(COLUMN_NAME_CATID, product.catId)
+            put(COLUMN_NAME_CatId, product.catId)
             put(COLUMN_NAME_NAME, product.productName)
             put(COLUMN_NAME_Image, product.image)
             put(COLUMN_NAME_QUANTITY, product.quantity)
@@ -111,15 +100,6 @@ class DBHelper(var context: Context) :
         }
 
         return db.insert(DATABASE_new_TABLE_NAME, null, data)
-    }
-
-    fun insertIfNotExist(product: Data3simple): Long? {
-        return if (read(product) != null) {
-            Log.d("database", "data already exist")
-            null
-        } else {
-            insert(product)
-        }
     }
 
     @Synchronized
@@ -165,7 +145,7 @@ class DBHelper(var context: Context) :
         val projection = null
         val selection = "$COLUMN_NAME_NAME = ?"
         val selectionArg = arrayOf(data3simple.productName)
-        val sortOrder = "$COLUMN_NAME_CATID ASC"
+        val sortOrder = "$COLUMN_NAME_CatId ASC"
         val cursor = db.query(
             DATABASE_new_TABLE_NAME,
             projection,
@@ -178,7 +158,7 @@ class DBHelper(var context: Context) :
         if (cursor != null) {
             with(cursor) {
                 while (moveToNext()) {
-                    val id1 = getInt(getColumnIndexOrThrow(COLUMN_NAME_CATID))
+                    val id1 = getInt(getColumnIndexOrThrow(COLUMN_NAME_CatId))
                     val name = getString(getColumnIndexOrThrow(COLUMN_NAME_NAME))
                     val image = getString(getColumnIndexOrThrow(COLUMN_NAME_Image))
                     val quantity = getInt(getColumnIndexOrThrow(COLUMN_NAME_QUANTITY))
@@ -208,13 +188,13 @@ class DBHelper(var context: Context) :
     fun readAll(): ArrayList<Data3simple> {
         val db = readableDatabase
         val projection = null
-        val sortOrder = "$COLUMN_NAME_CATID ASC"
+        val sortOrder = "$COLUMN_NAME_CatId ASC"
         val result: ArrayList<Data3simple> = arrayListOf()
         val cursor =
             db.query(DATABASE_new_TABLE_NAME, projection, null, null, null, null, sortOrder)
         with(cursor) {
             while (moveToNext()) {
-                val id1 = getInt(getColumnIndexOrThrow(COLUMN_NAME_CATID))
+                val id1 = getInt(getColumnIndexOrThrow(COLUMN_NAME_CatId))
                 val name = getString(getColumnIndexOrThrow(COLUMN_NAME_NAME))
                 val image = getString(getColumnIndexOrThrow(COLUMN_NAME_Image))
                 val quantity = getInt(getColumnIndexOrThrow(COLUMN_NAME_QUANTITY))
@@ -237,8 +217,8 @@ class DBHelper(var context: Context) :
     fun countAll(): Int {
         val db = readableDatabase
         val projection = null
-        val sortOrder = "$COLUMN_NAME_CATID ASC"
-        var result: Int = 0
+        val sortOrder = "$COLUMN_NAME_CatId ASC"
+        var result = 0
         val cursor =
             db.query(DATABASE_new_TABLE_NAME, projection, null, null, null, null, sortOrder)
         with(cursor) {
@@ -264,7 +244,7 @@ class DBHelper(var context: Context) :
         return db.delete(DATABASE_new_TABLE_NAME, null, null)
     }
 
-    fun update(
+    private fun update(
         newProduct: Data3simple,
         oldProduct: Data3simple
     ): Int {
@@ -274,7 +254,7 @@ class DBHelper(var context: Context) :
                 put(COLUMN_NAME_NAME, newProduct.productName)
                 put(COLUMN_NAME_Image, newProduct.image)
                 put(COLUMN_NAME_QUANTITY, newProduct.quantity)
-                put(COLUMN_NAME_CATID, newProduct.catId)
+                put(COLUMN_NAME_CatId, newProduct.catId)
             }
             Log.d(
                 "abc",

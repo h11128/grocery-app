@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ui.PaymenActivity">
+    tools:context=".activities.ui.PaymentActivity">
 
     <include layout="@layout/tool_bar"
         app:layout_constraintTop_toTopOf="parent" />
@@ -110,7 +110,7 @@
             app:layout_constraintTop_toBottomOf="@id/text_order_promotion" />
 
         <TextView
-            android:id="@+id/text_order_beforetax"
+            android:id="@+id/text_order_before_tax"
             style="@style/CustomText1"
             android:text="discount"
             app:layout_constraintEnd_toEndOf="parent"
@@ -120,14 +120,14 @@
             style="@style/CustomText1"
             android:text="Estimated tax"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_order_beforetax" />
+            app:layout_constraintTop_toBottomOf="@id/text_order_before_tax" />
 
         <TextView
             android:id="@+id/text_order_tax"
             style="@style/CustomText1"
             android:text="discount"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_order_beforetax" />
+            app:layout_constraintTop_toBottomOf="@id/text_order_before_tax" />
 
         <TextView
             style="@style/CustomText"

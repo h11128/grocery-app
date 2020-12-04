@@ -5,13 +5,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.jason.grocery.fragment.AddressListFragment
 import com.jason.grocery.fragment.EditAddressFragment
 import com.jason.grocery.model.Address
 import com.jason.grocery.model.OrderSummary
 
-class ViewPagerAdapterAddress(var fm: FragmentManager, lf: Lifecycle): FragmentStateAdapter(fm, lf) {
+class ViewPagerAdapterAddress(private var fm: FragmentManager, lf: Lifecycle): FragmentStateAdapter(fm, lf) {
     override fun getItemCount(): Int {
         return 2
     }
@@ -19,7 +18,7 @@ class ViewPagerAdapterAddress(var fm: FragmentManager, lf: Lifecycle): FragmentS
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0 -> {
-                Log.d("anc","current addressList size ${addressList}")
+                Log.d("anc","current addressList size $addressList")
                 AddressListFragment.newInstance(addressList)
             }
             else -> {

@@ -33,7 +33,7 @@
         <activity android:name=".activities.SubcategoryActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.ui.OrderResultActivity" />
-        <activity android:name=".activities.ui.PaymenActivity" />
+        <activity android:name=".activities.ui.PaymentActivity" />
         <activity android:name=".activities.AddressActivity" />
     </application>
 

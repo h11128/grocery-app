@@ -16,7 +16,6 @@ const val KEY_Category = "catId"
 const val KEY_Count = "count"
 const val KEY_OrderSummary = "order_summary"
 const val KEY_Address = "address"
-const val error_detail = "error when try to access property \n"
 const val Name_Category = "name_cate"
 const val Result_Code_Log_out = 2
 const val Result_Code_To_Main = 1

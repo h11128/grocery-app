@@ -40,7 +40,7 @@ class ViewPagerAdapterSub(
         return mList.indexOf(data)
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return mList[position].subName
     }
 }

@@ -1,7 +1,6 @@
 package com.jason.grocery.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -9,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.ParseError
@@ -18,13 +18,9 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import com.jason.grocery.R
 import com.jason.grocery.adapter.ViewPagerAdapterAddress
 import com.jason.grocery.data.DBHelper
-import com.jason.grocery.fragment.AddressListFragment
 import com.jason.grocery.fragment.EditAddressFragment
 import com.jason.grocery.model.*
 import kotlinx.android.synthetic.main.activity_address.*
@@ -32,16 +28,16 @@ import kotlinx.android.synthetic.main.relative_tool_cart.view.*
 import org.json.JSONArray
 import org.json.JSONObject
 
-class AddressActivity : AppCompatActivity(), EditAddressFragment.passAddress {
-    private lateinit var viewPagerAdapater: ViewPagerAdapterAddress
+class AddressActivity : AppCompatActivity(), EditAddressFragment.PassAddress {
+    private lateinit var viewPagerAdapter: ViewPagerAdapterAddress
     private lateinit var viewPager2: ViewPager2
     private lateinit var orderSummary: OrderSummary
     private lateinit var sessionManager: SessionManager
     private lateinit var queue: RequestQueue
     private lateinit var dbHelper: DBHelper
-    private var textView_inside_cart: TextView? = null
+    private var textViewInsideCart: TextView? = null
 
-    var addressList: ArrayList<Address> = arrayListOf()
+    private var addressList: ArrayList<Address> = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_address)
@@ -85,21 +81,21 @@ class AddressActivity : AppCompatActivity(), EditAddressFragment.passAddress {
             val intent = Intent(this, CartActivity::class.java)
             startActivityForResult(intent, 0)
         }
-        textView_inside_cart = view.text_inside_cart
+        textViewInsideCart = view.text_inside_cart
         updateQuantity()
         return super.onCreateOptionsMenu(menu)
     }
 
     private fun updateQuantity() {
-        val total_count = dbHelper.countAll()
-        Log.d("abc", "total count in $total_count")
-        if (total_count <= 0){
-            textView_inside_cart?.visibility = View.GONE
+        val totalCount = dbHelper.countAll()
+        Log.d("abc", "total count in $totalCount")
+        if (totalCount <= 0){
+            textViewInsideCart?.visibility = View.GONE
 
         }
         else{
-            textView_inside_cart?.visibility = View.VISIBLE
-            textView_inside_cart?.text = total_count.toString()
+            textViewInsideCart?.visibility = View.VISIBLE
+            textViewInsideCart?.text = totalCount.toString()
         }
     }
 
@@ -132,8 +128,8 @@ class AddressActivity : AppCompatActivity(), EditAddressFragment.passAddress {
         title = "Address"
 
 
-        viewPagerAdapater = ViewPagerAdapterAddress(supportFragmentManager, lifecycle)
-        viewPager2.adapter = viewPagerAdapater
+        viewPagerAdapter = ViewPagerAdapterAddress(supportFragmentManager, lifecycle)
+        viewPager2.adapter = viewPagerAdapter
         getAddressOnline()
 
         button_add_address.setOnClickListener {
@@ -179,7 +175,7 @@ class AddressActivity : AppCompatActivity(), EditAddressFragment.passAddress {
                 Log.d("abc", te.toString())
             }
             addressList = onlineList
-            viewPagerAdapater.update(orderSummary, addressList)
+            viewPagerAdapter.update(orderSummary, addressList)
         }, {
             Log.d("error", it.toString())
             Log.d("error", "${ParseError(it).stackTrace}")
@@ -191,10 +187,10 @@ class AddressActivity : AppCompatActivity(), EditAddressFragment.passAddress {
 
     override fun editAddressCallback(data: Address) {
 
-        Log.d("abc", "get Address ${data}")
+        Log.d("abc", "get Address $data")
         postAddressOnline(data)
         getAddressOnline()
-        viewPagerAdapater.update(orderSummary, addressList)
+        viewPagerAdapter.update(orderSummary, addressList)
         viewPager2.currentItem = 0
     }
 }

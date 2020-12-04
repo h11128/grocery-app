@@ -15,14 +15,12 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.jason.grocery.R
-import com.jason.grocery.adapter.RecyclerAdapterCart
 import com.jason.grocery.adapter.ViewPagerAdapterSub
 import com.jason.grocery.data.DBHelper
 import com.jason.grocery.fragment.SubFragment
 import com.jason.grocery.model.*
 import kotlinx.android.synthetic.main.activity_subcat.*
 import kotlinx.android.synthetic.main.relative_tool_cart.view.*
-import kotlinx.android.synthetic.main.tool_bar.*
 
 class SubcategoryActivity : AppCompatActivity(), SubFragment.QuantityCallBack {
     private var catId = 0
@@ -33,7 +31,7 @@ class SubcategoryActivity : AppCompatActivity(), SubFragment.QuantityCallBack {
     private lateinit var subAdapter: ViewPagerAdapterSub
     private var subList: ArrayList<Data2> = arrayListOf()
     private var counter = 0
-    private var textView_inside_cart: TextView? = null
+    private var textViewInsideCart: TextView? = null
     private lateinit var dbHelper: DBHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,7 +95,7 @@ class SubcategoryActivity : AppCompatActivity(), SubFragment.QuantityCallBack {
             val intent = Intent(this, CartActivity::class.java)
             startActivityForResult(intent, 0)
         }
-        textView_inside_cart = view.text_inside_cart
+        textViewInsideCart = view.text_inside_cart
         updateQuantity()
         return super.onCreateOptionsMenu(menu)
     }
@@ -146,15 +144,15 @@ class SubcategoryActivity : AppCompatActivity(), SubFragment.QuantityCallBack {
     }
 
     override fun updateQuantity() {
-        val total_count = dbHelper.countAll()
-        Log.d("abc", "total count in $total_count")
-        if (total_count <= 0){
-            textView_inside_cart?.visibility = View.GONE
+        val totalCount = dbHelper.countAll()
+        Log.d("abc", "total count in $totalCount")
+        if (totalCount <= 0){
+            textViewInsideCart?.visibility = View.GONE
 
         }
         else{
-            textView_inside_cart?.visibility = View.VISIBLE
-            textView_inside_cart?.text = total_count.toString()
+            textViewInsideCart?.visibility = View.VISIBLE
+            textViewInsideCart?.text = totalCount.toString()
         }
     }
 

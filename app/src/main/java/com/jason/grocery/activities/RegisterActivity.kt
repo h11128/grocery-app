@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 import org.json.JSONObject
 
 class RegisterActivity : AppCompatActivity() {
-    lateinit var sessionManager: SessionManager
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

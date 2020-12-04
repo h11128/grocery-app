@@ -30,7 +30,7 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var myToast: Toast
     private lateinit var productData: Data3
     private var simpleData: Data3simple? = null
-    private var textView_inside_cart: TextView? = null
+    private var textViewInsideCart: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
@@ -80,7 +80,7 @@ class ProductActivity : AppCompatActivity() {
             val intent = Intent(this, CartActivity::class.java)
             startActivityForResult(intent, 0)
         }
-        textView_inside_cart = view.text_inside_cart
+        textViewInsideCart = view.text_inside_cart
         updateQuantity()
         return super.onCreateOptionsMenu(menu)
     }
@@ -177,7 +177,7 @@ class ProductActivity : AppCompatActivity() {
     }
 
     private fun switchCartUI(newStatus: Boolean){
-        Log.d("abc", "swtich Cart UI $newStatus")
+        Log.d("abc", "switch Cart UI $newStatus")
         if(newStatus){
             button_add_cart.visibility = View.GONE
             button_add_quantity.visibility = View.VISIBLE
@@ -195,16 +195,16 @@ class ProductActivity : AppCompatActivity() {
 
 
     }
-    fun updateQuantity() {
-        val total_count = dbHelper.countAll()
-        Log.d("abc", "total count in $total_count")
-        if (total_count <= 0){
-            textView_inside_cart?.visibility = View.GONE
+    private fun updateQuantity() {
+        val totalCount = dbHelper.countAll()
+        Log.d("abc", "total count in $totalCount")
+        if (totalCount <= 0){
+            textViewInsideCart?.visibility = View.GONE
 
         }
         else{
-            textView_inside_cart?.visibility = View.VISIBLE
-            textView_inside_cart?.text = total_count.toString()
+            textViewInsideCart?.visibility = View.VISIBLE
+            textViewInsideCart?.text = totalCount.toString()
         }
     }
 

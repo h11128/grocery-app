@@ -1,21 +1,13 @@
 package com.jason.grocery.adapter
 
-import android.content.Context
-import android.content.Intent
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jason.grocery.R
-import com.jason.grocery.activities.AddressActivity
-import com.jason.grocery.activities.ui.PaymenActivity
-import com.jason.grocery.fragment.AddressListFragment
 
 import com.jason.grocery.model.Address
-import com.jason.grocery.model.SessionManager
 import kotlinx.android.synthetic.main.recycler_adapter_address.view.*
 
 class RecyclerAdapterAddress(
@@ -27,8 +19,8 @@ class RecyclerAdapterAddress(
     var userName = ""
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(data: Address) {
-            Log.d("bind", "${data}")
-            itemView.text_user.text ="User: " + userName
+            Log.d("bind", "$data")
+            itemView.text_user.text = "User: $userName"
             itemView.text_city.text = "City: " + data.city
             itemView.text_houseNo.text = "HouseNo: " + data.houseNo
             itemView.text_pincode.text = "Pincode: " + data.pincode.toString()

@@ -3,30 +3,26 @@ package com.jason.grocery.adapter
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
-import android.os.Handler
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.style.StrikethroughSpan
 import android.text.style.StyleSpan
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jason.grocery.R
 import com.jason.grocery.activities.CartActivity
 import com.jason.grocery.data.Data3simple
-import com.jason.grocery.fragment.SubFragment
 import com.jason.grocery.model.getImageUrl
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recycler_adapter_product2.view.*
 import kotlinx.android.synthetic.main.relative_add_cart.view.*
 
 class RecyclerAdapterCart(
-    private var mContext: Context,
+    mContext: Context,
     private var mList: ArrayList<Data3simple>
 ) :
     RecyclerView.Adapter<RecyclerAdapterCart.MyViewHolder>() {
@@ -47,7 +43,7 @@ class RecyclerAdapterCart(
             ss2.setSpan(StyleSpan(Typeface.ITALIC), index1, ss2.length, 0)
             ss2.setSpan(RelativeSizeSpan(0.8f), index1, ss2.length, 0)
             itemView.text_product2_mrp_price.text = ss2
-            itemView.text_prodcut2_price.text = priText
+            itemView.text_product2_price.text = priText
 
             itemView.text_Inside.text = data.quantity.toString()
             itemView.button_add_quantity.setOnClickListener {

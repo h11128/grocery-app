@@ -2,10 +2,10 @@ package com.jason.grocery.fragment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.jason.grocery.R
 import com.jason.grocery.activities.AddressActivity
 import com.jason.grocery.model.Address
@@ -15,11 +15,8 @@ import kotlinx.android.synthetic.main.fragment_edit_address.*
 
 class EditAddressFragment : Fragment() {
     var dataList: ArrayList<Address> = arrayListOf()
-    lateinit var mContext: Context
-    var callback: passAddress? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var mContext: Context
+    private var callback: PassAddress? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +38,7 @@ class EditAddressFragment : Fragment() {
         }
     }
 
-    interface passAddress{
+    interface PassAddress{
         fun editAddressCallback(data: Address)
     }
 

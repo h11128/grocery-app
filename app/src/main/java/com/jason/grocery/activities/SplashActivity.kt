@@ -8,7 +8,7 @@ import com.jason.grocery.R
 import com.jason.grocery.model.SessionManager
 
 class SplashActivity : AppCompatActivity() {
-    lateinit var sessionManager: SessionManager
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

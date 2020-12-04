@@ -30,9 +30,9 @@ class SubFragment : Fragment(), RecyclerAdapterSub.Callback {
     lateinit var subcategory: Data2
     private lateinit var product: Product
     private var productList: ArrayList<Data3> = arrayListOf()
-    lateinit var dbHelper: DBHelper
+    private lateinit var dbHelper: DBHelper
     lateinit var adapter: RecyclerAdapterSub
-    lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
     private var quantityCallBack: QuantityCallBack? = null
 
     override fun onCreateView(

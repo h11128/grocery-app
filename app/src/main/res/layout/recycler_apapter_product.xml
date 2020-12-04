@@ -26,7 +26,7 @@
     </ImageView>
 
     <TextView
-        android:id="@+id/text_prodcut_name"
+        android:id="@+id/text_product_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/name"
@@ -35,7 +35,7 @@
     </TextView>
 
     <TextView
-        android:id="@+id/text_prodcut_price"
+        android:id="@+id/text_product_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/price"

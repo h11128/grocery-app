@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var sessionManager:SessionManager
     private lateinit var drawerLayout: DrawerLayout
     private val catUrl = url_cate
-    private var textView_inside_cart: TextView? = null
+    private var textViewInsideCart: TextView? = null
     private lateinit var dbHelper: DBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar: Toolbar = toolbar_general
         setSupportActionBar(toolbar)
         sessionManager = SessionManager(this)
-        Log.d("abc", "id from mainactivity ${sessionManager.getUserId()}")
+        Log.d("abc", "id from MainActivity ${sessionManager.getUserId()}")
         imageList = arrayListOf()
 
         viewPagerAdapter = ViewPagerAdapterMain(imageList, supportFragmentManager, lifecycle)
@@ -63,16 +63,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         getCategory()
         drawerLayout = drawer_main
         val navView = nav_view
-        var headerView = navView.getHeaderView(0)
+        val headerView = navView.getHeaderView(0)
         headerView.text_header_username.text = sessionManager.getUserName().split("@")[0]
         headerView.text_header_idk.text = sessionManager.getUserName()
 
-        var toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar_general, 0,0)
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar_general, 0,0)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
         dbHelper = DBHelper(this)
-        Log.d("abc", "itemcount ${viewPagerAdapter.itemCount}")
+        Log.d("abc", "item count ${viewPagerAdapter.itemCount}")
     }
 
     private fun getCategory() {
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val intent = Intent(this, CartActivity::class.java)
             startActivityForResult(intent, 0)
         }
-        textView_inside_cart = view.text_inside_cart
+        textViewInsideCart = view.text_inside_cart
         updateQuantity()
         return super.onCreateOptionsMenu(menu)
     }
@@ -146,7 +146,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         private var instance: MainActivity? = null
 
         fun onItemClick(catId: Int, count: Int, categoryName: String) {
-            Log.d("abc", "onItemclick")
+            Log.d("abc", "onItemClick")
             Log.d("abc", "catId $catId count $count")
             val intent1 = Intent(instance, SubcategoryActivity::class.java).apply {
                 Log.d("abc", "catId $catId count $count")
@@ -171,16 +171,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
 
     }
-    fun updateQuantity() {
-        val total_count = dbHelper.countAll()
-        Log.d("abc", "total count in $total_count")
-        if (total_count <= 0){
-            textView_inside_cart?.visibility = View.GONE
+    private fun updateQuantity() {
+        val totalCount = dbHelper.countAll()
+        Log.d("abc", "total count in $totalCount")
+        if (totalCount <= 0){
+            textViewInsideCart?.visibility = View.GONE
 
         }
         else{
-            textView_inside_cart?.visibility = View.VISIBLE
-            textView_inside_cart?.text = total_count.toString()
+            textViewInsideCart?.visibility = View.VISIBLE
+            textViewInsideCart?.text = totalCount.toString()
         }
     }
 }

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
-import android.text.style.StrikethroughSpan
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -36,7 +35,7 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
     private var cartStatus = true
     private var subTotal = 0.0
     private lateinit var orderSummary: OrderSummary
-    private var textView_inside_cart: TextView? = null
+    private var textViewInsideCart: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +54,7 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         title = "Shopping Cart"
         button_check_out.setOnClickListener {
-            Log.d("abc", "orderSummary when checkout ${orderSummary}")
+            Log.d("abc", "orderSummary when checkout $orderSummary")
             val intent = Intent(this, AddressActivity::class.java).apply { putExtra(
                 KEY_OrderSummary, orderSummary) }
             startActivityForResult(intent, 0)
@@ -123,7 +122,7 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         val view = menu.findItem(R.id.item_shopping_cart).actionView
-        textView_inside_cart = view.text_inside_cart
+        textViewInsideCart = view.text_inside_cart
         updateQuantity()
         return super.onCreateOptionsMenu(menu)
     }
@@ -151,7 +150,7 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
         calculate()
         switchItemUI(subTotal > 0.0)
         Log.d("abc", "refresh adapter")
-        Log.d("abc","current product ${dbHelper.readAll().toArray().toString()}")
+        Log.d("abc","current product ${dbHelper.readAll().toArray()}")
     }
 
     override fun changeQuantity(data: Data3simple, operation: Int) {
@@ -219,15 +218,15 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
         updateQuantity()
     }
     private fun updateQuantity() {
-        val total_count = dbHelper.countAll()
-        Log.d("abc", "total count in $total_count")
-        if (total_count <= 0){
-            textView_inside_cart?.visibility = View.GONE
+        val totalCount = dbHelper.countAll()
+        Log.d("abc", "total count in $totalCount")
+        if (totalCount <= 0){
+            textViewInsideCart?.visibility = View.GONE
 
         }
         else{
-            textView_inside_cart?.visibility = View.VISIBLE
-            textView_inside_cart?.text = total_count.toString()
+            textViewInsideCart?.visibility = View.VISIBLE
+            textViewInsideCart?.text = totalCount.toString()
         }
     }
 }

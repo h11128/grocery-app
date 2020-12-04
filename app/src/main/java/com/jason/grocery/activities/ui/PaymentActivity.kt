@@ -32,11 +32,11 @@ import retrofit2.Response
 import java.util.*
 import kotlin.collections.HashMap
 
-class PaymenActivity : AppCompatActivity() {
-    lateinit var sessionManager: SessionManager
-    lateinit var total_order: Order
+class PaymentActivity : AppCompatActivity() {
+    private lateinit var sessionManager: SessionManager
+    private lateinit var totalOrder: Order
     lateinit var queue: RequestQueue
-    lateinit var result: String
+    private lateinit var result: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paymen)
@@ -112,7 +112,7 @@ class PaymenActivity : AppCompatActivity() {
         val userId = sessionManager.getUserId()
 
         val data = intent.getSerializableExtra(KEY_Address)
-        var orderSummary = intent.getSerializableExtra(key_orderSummary) as OrderSummary
+        val orderSummary = intent.getSerializableExtra(key_orderSummary) as OrderSummary
         orderSummary._id = userId
         Log.d("orderSummary", "$orderSummary")
         val shippingAddress = (data as Address).toShipAddress()
@@ -128,7 +128,7 @@ class PaymenActivity : AppCompatActivity() {
         }
 
         val user = User(userId, sessionManager.getUserName(), sessionManager.getMobile())
-        total_order =
+        totalOrder =
             Order(
                 0, userId, "abc", "Confirmed",
                 orderSummary, productXList, shippingAddress, user, userId
@@ -143,10 +143,10 @@ class PaymenActivity : AppCompatActivity() {
 
         text_shipping_to.text = ss0
 
-        val DeliveryString = "Delivery: ${Calendar.getInstance().time}"
-        val ss1 = SpannableString(DeliveryString)
+        val deliveryString = "Delivery: ${Calendar.getInstance().time}"
+        val ss1 = SpannableString(deliveryString)
         val index1 = ss1.indexOf("Delivery:") + 10
-        Log.d("abc", "index ${index0} ${index1}")
+        Log.d("abc", "index $index0 $index1")
         ss1.setSpan(StyleSpan(Typeface.BOLD), index1, ss1.length, 0)
         ss1.setSpan(RelativeSizeSpan(1f), index1, ss1.length, 0)
         ss1.setSpan(ForegroundColorSpan(getColor(R.color.darkGreen)), index1, ss1.length, 0)
@@ -157,13 +157,13 @@ class PaymenActivity : AppCompatActivity() {
 
         text_order_shipping.text = "$${orderSummary.deliveryCharges}"
         text_order_promotion.text = "-$${orderSummary.discount}"
-        text_order_beforetax.text = "$${orderSummary.ourPrice - orderSummary.deliveryCharges}"
+        text_order_before_tax.text = "$${orderSummary.ourPrice - orderSummary.deliveryCharges}"
         val tax = (orderSummary.ourPrice - orderSummary.deliveryCharges)* 0.05
         text_order_tax.text = "$${tax}"
         text_order_total.text = "$${orderSummary.ourPrice - orderSummary.deliveryCharges + tax}"
 
         button_confirm_payment.setOnClickListener {
-            postOrderOnline1(total_order)
+            postOrderOnline1(totalOrder)
 
         }
 
@@ -208,12 +208,12 @@ class PaymenActivity : AppCompatActivity() {
         for (key in sendData.keys) {
             Log.d("abc", "key $key value ${sendData[key]}")
         }
-        Log.d("abc", "sendDataObject7 ${sendDataObject7}")
-        Log.d("abc", "sendDataObject ${sendDataObject}")
-        Log.d("abc", "sendDataObject2 ${sendDataObject2}")
-        Log.d("abc", "sendDataObject3 ${sendDataObject3}")
-        Log.d("abc", "sendDataObject4 ${sendDataObject4}")
-        Log.d("abc", "sendDataObject5 ${sendDataObject5}")
+        Log.d("abc", "sendDataObject7 $sendDataObject7")
+        Log.d("abc", "sendDataObject $sendDataObject")
+        Log.d("abc", "sendDataObject2 $sendDataObject2")
+        Log.d("abc", "sendDataObject3 $sendDataObject3")
+        Log.d("abc", "sendDataObject4 $sendDataObject4")
+        Log.d("abc", "sendDataObject5 $sendDataObject5")
 
 
         val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url_order, sendDataObject7, {
@@ -240,7 +240,7 @@ class PaymenActivity : AppCompatActivity() {
         api.postOrder(data.toSendOrder()).enqueue(object: Callback<OrderResponse>{
             override fun onResponse(call: Call<OrderResponse>, response: Response<OrderResponse>) {
                 val data1 = response.body()
-                Log.d("abc","data1 ${data1}")
+                Log.d("abc","data1 $data1")
 
                 if (data1 != null){
                     val orderId = data1.data._id
