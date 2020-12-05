@@ -31,7 +31,8 @@ import kotlinx.android.synthetic.main.nav_header.view.*
 import kotlinx.android.synthetic.main.relative_tool_cart.view.*
 import kotlinx.android.synthetic.main.tool_bar.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+    RecyclerAdapterMain.ClickCallBack {
     private lateinit var imageList: ArrayList<Data1>
     private lateinit var queue: RequestQueue
     private lateinit var category: Category
@@ -48,7 +49,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //supportActionBar?.setDisplayHomeAsUpEnabled(true)
         //supportActionBar?.setDisplayShowHomeEnabled(true)
         init()
-        instance = this
     }
 
     private fun init() {
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 viewPagerAdapter.updateItem(count, category.data[count])
             }
 
-            recycler_view_main.adapter = RecyclerAdapterMain(category.data as ArrayList<Data1>)
+            recycler_view_main.adapter = RecyclerAdapterMain(this, category.data as ArrayList<Data1>)
             recycler_view_main.layoutManager = StaggeredGridLayoutManager(2, 1)
 
         }, {
@@ -142,22 +142,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         finish()
     }
 
-    companion object {
-        private var instance: MainActivity? = null
-
-        fun onItemClick(catId: Int, count: Int, categoryName: String) {
-            Log.d("abc", "onItemClick")
-            Log.d("abc", "catId $catId count $count")
-            val intent1 = Intent(instance, SubcategoryActivity::class.java).apply {
-                Log.d("abc", "catId $catId count $count")
-                putExtra(KEY_Category, catId.toString())
-                putExtra(KEY_Count, count)
-                putExtra(Name_Category, categoryName)
-            }
-            instance?.startActivityForResult(intent1, 0)
-        }
-    }
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_shopping_cart -> {
@@ -182,5 +166,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             textViewInsideCart?.visibility = View.VISIBLE
             textViewInsideCart?.text = totalCount.toString()
         }
+    }
+
+    override fun onItemClick(catId: Int, count: Int, categoryName: String) {
+            Log.d("abc", "onItemClick")
+            Log.d("abc", "catId $catId count $count")
+            val intent1 = Intent(this, SubcategoryActivity::class.java).apply {
+                Log.d("abc", "catId $catId count $count")
+                putExtra(KEY_Category, catId.toString())
+                putExtra(KEY_Count, count)
+                putExtra(Name_Category, categoryName)
+            }
+            startActivityForResult(intent1, 0)
+
     }
 }

@@ -43,7 +43,8 @@ class ProductActivity : AppCompatActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
         //supportActionBar?.setDisplayShowHomeEnabled(true)
         dbHelper = DBHelper(this)
-        myToast = Toast.makeText(this, "abc", Toast.LENGTH_SHORT)
+        myToast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
+        myToast.show()
         init()
     }
 
@@ -158,7 +159,7 @@ class ProductActivity : AppCompatActivity() {
     }
 
     private fun showToast(mode: Int){
-        var showText = ""
+        var showText: String
         showText = "Add ${simpleData?.productName} to cart!\nCurrent Quantity: ${simpleData?.quantity}"
 
         if (mode == 1){

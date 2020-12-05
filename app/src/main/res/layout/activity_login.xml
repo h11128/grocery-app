@@ -7,7 +7,7 @@
     tools:context=".activities.LoginActivity"
     android:paddingHorizontal="15dp"
     android:layout_gravity="center"
-    android:background="@drawable/simple_background"
+    android:theme="@style/NoActionBar"
     >
 
     <EditText

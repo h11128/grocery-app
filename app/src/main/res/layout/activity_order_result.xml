@@ -15,8 +15,8 @@
         android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:textSize="30dp"
-        android:text="order result"
+        android:textSize="30sp"
+        android:text="@string/initial_text"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_general"
         app:layout_constraintBottom_toBottomOf="parent">
 

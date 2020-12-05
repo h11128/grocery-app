@@ -25,8 +25,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
                 android:gravity="center"
-                android:text="No Items In Cart!"
-                android:textSize="40dp"
+                android:text="@string/no_items_in_cart"
+                android:textSize="40sp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +53,7 @@
 
                 <TextView
                     style="@style/CustomText"
-                    android:text="SubTotal"
+                    android:text="@string/subtotal"
                     app:layout_constraintBottom_toTopOf="@id/text_discount"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +61,7 @@
                 <TextView
                     android:id="@+id/text_sub_total"
                     style="@style/CustomText"
-                    android:text="SubTotal"
+                    android:text="@string/initial_text"
                     app:layout_constraintBottom_toTopOf="@id/text_discount"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -70,7 +70,7 @@
 
                 <TextView
                     style="@style/CustomText"
-                    android:text="Discount"
+                    android:text="@string/discount"
                     app:layout_constraintBottom_toTopOf="@id/text_price_total"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_sub_total" />
@@ -78,7 +78,7 @@
                 <TextView
                     android:id="@+id/text_discount"
                     style="@style/CustomText"
-                    android:text="discount"
+                    android:text="@string/initial_text"
                     app:layout_constraintBottom_toTopOf="@id/text_price_total"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_sub_total" />
@@ -86,7 +86,7 @@
                 <TextView
                     style="@style/CustomText"
 
-                    android:text="Total"
+                    android:text="@string/total"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_discount" />
@@ -94,7 +94,7 @@
                 <TextView
                     android:id="@+id/text_price_total"
                     style="@style/CustomText"
-                    android:text="discount"
+                    android:text="@string/initial_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_discount" />
@@ -108,7 +108,7 @@
                 android:background="@drawable/shape_frame"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:gravity="center"
-                android:text="check out"
+                android:text="@string/check_out"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

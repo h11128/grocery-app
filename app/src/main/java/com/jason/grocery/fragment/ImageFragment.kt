@@ -1,5 +1,6 @@
 package com.jason.grocery.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.jason.grocery.R
 import com.jason.grocery.activities.MainActivity
+import com.jason.grocery.adapter.RecyclerAdapterMain
 import com.jason.grocery.model.Data1
 import com.jason.grocery.model.getImageUrl
 import com.squareup.picasso.Picasso
@@ -17,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_image.view.*
 class ImageFragment(var data: Data1, private var count: Int) : Fragment() {
     private var url: String = data.catImage
     private var catId = data.catId
-
+    private var callback: RecyclerAdapterMain.ClickCallBack? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,12 +35,17 @@ class ImageFragment(var data: Data1, private var count: Int) : Fragment() {
         Picasso.get().load(getImageUrl(url))
             .error(R.drawable.image_error).into(view.image_view_pager)
         view.image_view_pager.setOnClickListener {
-            MainActivity.onItemClick(
+            callback?.onItemClick(
                 catId,
                 count,
                 data.catName
             )
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = context as? MainActivity
     }
 
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
@@ -10,18 +9,10 @@
     <color name="colorAccent">#004ba0</color>
     <color name="white">#ffff</color>
     <color name="red">#ff0000</color>
-    <color name="blue">#0000ff</color>
-    <color name="green">#00ff00</color>
     <color name="black">#000000</color>
     <color name="colorButtonGreen">#7EB13A</color>
-    <color name="amber">#fbc02d</color>
     <color name="darkGreen">#2e7d32</color>
-    <color name="pink">#f06292</color>
-    <color name="greenAndBlue">#03dac5</color>
-    <color name="primaryGreyColor">#424242</color>
     <color name="primaryGreyLightColor">#6d6d6d</color>
     <color name="primaryGreyDarkColor">#1b1b1b</color>
-    <color name="primaryGreyTextColor">#ffffff</color>
-    <color name="orange">#ff9800</color>
     <color name="darkRed">#d32f2f</color>
 </resources>

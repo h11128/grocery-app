@@ -30,5 +30,6 @@
     <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="background">@drawable/simple_background</item>
     </style>
 </resources>

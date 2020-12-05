@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="15dp"
     tools:context=".activities.RegisterActivity"
-    android:background="@drawable/simple_background"
     >
     <EditText
         android:id="@+id/edit_register_user"

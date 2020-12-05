@@ -18,8 +18,6 @@
         app:actionLayout="@layout/relative_tool_cart"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
-        android:tooltipText="1"
-        android:iconTint="@color/black"
         android:title="@string/cart">
     </item>
 </menu>

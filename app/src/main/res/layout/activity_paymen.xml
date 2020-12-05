@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button_confirm_payment"
-            android:text="confirm order"
+            android:text="@string/confirm_order"
             android:textColor="@color/white"
             android:backgroundTint="@color/colorPrimaryDark">
         </Button>
@@ -41,14 +41,14 @@
         <TextView
             android:id="@+id/text_shipping_to"
             style="@style/CustomText1"
-            android:text="Shipping to"
+            android:text="@string/shipping_to"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_order_delivery"
             style="@style/CustomText1"
-            android:text="Delivery to"
+            android:text="@string/delivery_to"
             app:layout_constraintTop_toBottomOf="@id/text_shipping_to"
             app:layout_constraintStart_toStartOf="parent"
              />
@@ -66,66 +66,66 @@
         <TextView
             android:id="@+id/text_item_count"
             style="@style/CustomText1"
-            android:text="Items"
+            android:text="@string/items"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_divider" />
 
         <TextView
             android:id="@+id/text_items"
             style="@style/CustomText1"
-            android:text="ItemPrice"
+            android:text="@string/itemprice"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_divider"  />
 
         <TextView
             style="@style/CustomText1"
-            android:text="Shipping &amp; handling"
+            android:text="@string/shipping_amp_handling"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_items" />
 
         <TextView
             android:id="@+id/text_order_shipping"
             style="@style/CustomText1"
-            android:text="discount"
+            android:text="@string/initial_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_items" />
 
         <TextView
             style="@style/CustomText1"
-            android:text="Promotion Applied"
+            android:text="@string/promotion_applied"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_order_shipping" />
 
         <TextView
             android:id="@+id/text_order_promotion"
             style="@style/CustomText1"
-            android:text="discount"
+            android:text="@string/initial_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_order_shipping" />
 
         <TextView
             style="@style/CustomText1"
-            android:text="Total before tax"
+            android:text="@string/total_before_tax"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_order_promotion" />
 
         <TextView
             android:id="@+id/text_order_before_tax"
             style="@style/CustomText1"
-            android:text="discount"
+            android:text="@string/initial_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_order_promotion" />
 
         <TextView
             style="@style/CustomText1"
-            android:text="Estimated tax"
+            android:text="@string/estimated_tax"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_order_before_tax" />
 
         <TextView
             android:id="@+id/text_order_tax"
             style="@style/CustomText1"
-            android:text="discount"
+            android:text="@string/initial_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_order_before_tax" />
 
@@ -134,7 +134,7 @@
             android:textStyle="bold"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Order Total"
+            android:text="@string/order_total"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_order_tax" />
 
@@ -146,7 +146,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/darkRed"
-            android:text="discount"
+            android:text="@string/initial_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_order_tax" />
     </androidx.constraintlayout.widget.ConstraintLayout>

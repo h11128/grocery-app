@@ -9,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_shopping_cart_24"
-        app:tint="@color/white">
+        app:tint="@color/white"
+        android:contentDescription="@string/shopping_cart">
 
     </ImageView>
 
@@ -21,9 +22,9 @@
         android:layout_alignEnd="@id/item_shopping_cart1"
         android:background="@drawable/shape_frame2"
         android:gravity="center"
-        android:text="1"
+        android:text="@string/initial_text"
         android:textColor="@color/white"
-        android:textSize="10sp" />
+        android:textSize="12sp" />
 
 
 </RelativeLayout>

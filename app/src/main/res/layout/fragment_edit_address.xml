@@ -1,48 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.EditAddressFragment"
-    android:tag="f1">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:tag="f1"
+    tools:context=".fragment.EditAddressFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <EditText
+        android:id="@+id/edit_address_city"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-        <EditText
-            android:id="@+id/edit_address_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="enter city" />
-        <EditText
-            android:id="@+id/edit_address_houseNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="enter houseNo" />
-        <EditText
-            android:id="@+id/edit_address_Pincode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="enter Pincode" />
-        <EditText
-            android:id="@+id/edit_address_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="enter type" />
-        <EditText
-            android:id="@+id/edit_address_streetName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="enter streetName" />
-        <Button
-            android:id="@+id/button_edit_add_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add address">
-        </Button>
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_city"
+        android:inputType="text"
+        android:importantForAutofill="no" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/edit_address_houseNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_house_number"
+        android:inputType="text"
+        android:importantForAutofill="no"/>
+
+    <EditText
+        android:id="@+id/edit_address_Pincode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_pin_code"
+        android:inputType="text"
+        android:importantForAutofill="no"/>
+
+    <EditText
+        android:id="@+id/edit_address_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_type"
+        android:inputType="text"
+        android:importantForAutofill="no"/>
+
+    <EditText
+        android:id="@+id/edit_address_streetName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_street_name"
+        android:inputType="text"
+        android:importantForAutofill="no"/>
+
+    <Button
+        android:id="@+id/button_edit_add_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_address_1" />
+</LinearLayout>

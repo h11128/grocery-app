@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="fresh"
+            android:text="@string/fresh"
             android:textColor="@color/darkGreen"
             android:textSize="25sp"
             android:layout_marginEnd="5dp"
@@ -54,7 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Shop Aisles"
+            android:text="@string/shop_aisles"
             android:textColor="@color/colorAccent"
             android:textSize="21sp"
             android:layout_marginEnd="5dp">
@@ -68,7 +68,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reverse a Time"
+            android:text="@string/reverse_a_time"
             android:textColor="@color/colorAccent"
             android:textSize="21sp"
             android:layout_marginEnd="5dp">
@@ -97,7 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/image_des"
-        android:text="title"
+        android:text="@string/title"
         android:textColor="@color/black"
         android:textSize="23sp"
         android:layout_marginTop="5dp"
@@ -126,7 +126,6 @@
         app:layout_constraintTop_toBottomOf="@id/image_des"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:autoSizeTextType="uniform"
         android:textSize="20sp"
         android:layout_marginTop="5dp"
         android:paddingHorizontal="15dp"
@@ -141,7 +140,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constrainedHeight="true"
         android:gravity="start"
-        android:autoSizeTextType="uniform"
         android:textColor="@color/black"
         android:layout_marginTop="5dp"
         android:paddingHorizontal="15dp"
@@ -152,7 +150,7 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp">
