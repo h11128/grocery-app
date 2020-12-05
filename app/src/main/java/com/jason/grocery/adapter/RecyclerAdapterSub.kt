@@ -36,10 +36,11 @@ class RecyclerAdapterSub(
                 .error(R.drawable.image_error).into(itemView.image_product1)
             itemView.text_product2_title.text = data.productName
             val priText = (data.price).toString() + "$"
-            val mrpText = (data.mrp).toString() + "$" + "  save ${(data.mrp as Double - data.price)}$"
+            val mrpText =
+                (data.mrp).toString() + "$" + "  save ${(data.mrp as Double - data.price)}$"
             val ss2 = SpannableString(mrpText)
             val index1 = mrpText.indexOf("save")
-            ss2.setSpan(StrikethroughSpan(), 0, index1 - 2 , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            ss2.setSpan(StrikethroughSpan(), 0, index1 - 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             ss2.setSpan(ForegroundColorSpan(Color.RED), index1, ss2.length, 0)
             ss2.setSpan(StyleSpan(Typeface.ITALIC), index1, ss2.length, 0)
             ss2.setSpan(RelativeSizeSpan(0.8f), index1, ss2.length, 0)
@@ -98,7 +99,7 @@ class RecyclerAdapterSub(
         notifyDataSetChanged()
     }
 
-    fun refreshCartUI(data: Data3, itemView: View){
+    fun refreshCartUI(data: Data3, itemView: View) {
         val simpleData1 = callback?.changeQuantity(data.getData3Simple(), 0)
         val status = checkStatus(simpleData1)
         switchCartUI(simpleData1, status, itemView)

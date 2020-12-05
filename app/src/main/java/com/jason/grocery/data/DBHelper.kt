@@ -27,11 +27,18 @@ data class Data3simple(
 
     }
 
-    fun toProductX(): ProductX?{
-        return if (mrpNumber != null && priceNumber != null){
-            val p = ProductX(catId.toString(), image, mrpNumber!!.toInt(), priceNumber!!.toInt(), productName, quantity)
+    fun toProductX(): ProductX? {
+        return if (mrpNumber != null && priceNumber != null) {
+            val p = ProductX(
+                catId.toString(),
+                image,
+                mrpNumber!!.toInt(),
+                priceNumber!!.toInt(),
+                productName,
+                quantity
+            )
             p
-        } else{
+        } else {
             null
         }
     }
@@ -80,10 +87,6 @@ class DBHelper(var context: Context) :
         DATABASE_VERSION -= 1
 
     }
-
-
-
-
 
 
     private fun insert(product: Data3simple): Long {
@@ -224,7 +227,7 @@ class DBHelper(var context: Context) :
         with(cursor) {
             while (moveToNext()) {
                 val quantity = getInt(getColumnIndexOrThrow(COLUMN_NAME_QUANTITY))
-                if (quantity > 0){
+                if (quantity > 0) {
                     result += quantity
                 }
             }

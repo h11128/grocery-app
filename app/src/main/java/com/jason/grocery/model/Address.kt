@@ -11,8 +11,8 @@ data class Address(
     val streetName: String,
     val type: String,
     val userId: String
-): Serializable{
-    fun toShipAddress(): ShippingAddress{
+) : Serializable {
+    fun toShipAddress(): ShippingAddress {
         return ShippingAddress(_id, city, houseNo, pincode, type)
     }
 }

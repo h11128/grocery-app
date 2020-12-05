@@ -10,15 +10,16 @@ import com.jason.grocery.fragment.EditAddressFragment
 import com.jason.grocery.model.Address
 import com.jason.grocery.model.OrderSummary
 
-class ViewPagerAdapterAddress(private var fm: FragmentManager, lf: Lifecycle): FragmentStateAdapter(fm, lf) {
+class ViewPagerAdapterAddress(private var fm: FragmentManager, lf: Lifecycle) :
+    FragmentStateAdapter(fm, lf) {
     override fun getItemCount(): Int {
         return 2
     }
 
     override fun createFragment(position: Int): Fragment {
-        return when(position){
+        return when (position) {
             0 -> {
-                Log.d("anc","current addressList size $addressList")
+                Log.d("anc", "current addressList size $addressList")
                 AddressListFragment.newInstance(addressList)
             }
             else -> {
@@ -27,7 +28,7 @@ class ViewPagerAdapterAddress(private var fm: FragmentManager, lf: Lifecycle): F
         }
     }
 
-    fun update(orderSummary: OrderSummary?, dataList: ArrayList<Address>){
+    fun update(orderSummary: OrderSummary?, dataList: ArrayList<Address>) {
         val fragment = fm.findFragmentByTag("f0") as AddressListFragment
         Log.d("abc", "update addressList ${dataList.size}")
         fragment.refreshDataList(dataList)
@@ -36,7 +37,7 @@ class ViewPagerAdapterAddress(private var fm: FragmentManager, lf: Lifecycle): F
     }
 
 
-    companion object{
+    companion object {
         var addressList: ArrayList<Address> = arrayListOf()
 
 

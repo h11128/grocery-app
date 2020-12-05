@@ -158,7 +158,7 @@ class PaymentActivity : AppCompatActivity() {
         text_order_shipping.text = "$${orderSummary.deliveryCharges}"
         text_order_promotion.text = "-$${orderSummary.discount}"
         text_order_before_tax.text = "$${orderSummary.ourPrice - orderSummary.deliveryCharges}"
-        val tax = (orderSummary.ourPrice - orderSummary.deliveryCharges)* 0.05
+        val tax = (orderSummary.ourPrice - orderSummary.deliveryCharges) * 0.05
         text_order_tax.text = "$${tax}"
         text_order_total.text = "$${orderSummary.ourPrice - orderSummary.deliveryCharges + tax}"
 
@@ -198,12 +198,12 @@ class PaymentActivity : AppCompatActivity() {
         val sendDataObject4 = Gson().toJson(data.toSendOrder())
         val sendDataObject5 = JSONObject(Gson().toJson(sendDataObject))
         val sendDataObject7 = JSONObject()
-        sendDataObject7.put("orderStatus",  data.orderStatus)
-        sendDataObject7.put("orderSummary",  JSONObject(Gson().toJson(data.orderSummary)))
-        sendDataObject7.put("products",  JSONArray(Gson().toJson(data.products)))
-        sendDataObject7.put("shippingAddress",  JSONObject(Gson().toJson(data.shippingAddress)))
-        sendDataObject7.put("user",  JSONObject(Gson().toJson(data.user)))
-        sendDataObject7.put("userId",  data.userId)
+        sendDataObject7.put("orderStatus", data.orderStatus)
+        sendDataObject7.put("orderSummary", JSONObject(Gson().toJson(data.orderSummary)))
+        sendDataObject7.put("products", JSONArray(Gson().toJson(data.products)))
+        sendDataObject7.put("shippingAddress", JSONObject(Gson().toJson(data.shippingAddress)))
+        sendDataObject7.put("user", JSONObject(Gson().toJson(data.user)))
+        sendDataObject7.put("userId", data.userId)
 
         for (key in sendData.keys) {
             Log.d("abc", "key $key value ${sendData[key]}")
@@ -235,16 +235,16 @@ class PaymentActivity : AppCompatActivity() {
         queue.add(jsonObjectRequest)
     }
 
-    private fun postOrderOnline1(data: Order){
+    private fun postOrderOnline1(data: Order) {
         val api = SendOrder.SendOrderApi()
-        api.postOrder(data.toSendOrder()).enqueue(object: Callback<OrderResponse>{
+        api.postOrder(data.toSendOrder()).enqueue(object : Callback<OrderResponse> {
             override fun onResponse(call: Call<OrderResponse>, response: Response<OrderResponse>) {
                 val data1 = response.body()
-                Log.d("abc","data1 $data1")
+                Log.d("abc", "data1 $data1")
 
-                if (data1 != null){
+                if (data1 != null) {
                     val orderId = data1.data._id
-                    Log.d("abc","post order success $orderId")
+                    Log.d("abc", "post order success $orderId")
                     returnOrderResult("post order success", orderId)
                 }
 
@@ -252,7 +252,7 @@ class PaymentActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
                 Log.d("abc", "error $t ${t.cause} ${t.message}")
-                returnOrderResult("fail to post order, error $t ${t.cause} ${t.message}" , "0")
+                returnOrderResult("fail to post order, error $t ${t.cause} ${t.message}", "0")
 
             }
         })

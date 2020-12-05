@@ -30,7 +30,7 @@ data class Data3(
         return Data3simple(catId, image, productName, quantity = 1, priceString)
     }
 
-    fun getData3SimpleSample(): Data3simple{
+    fun getData3SimpleSample(): Data3simple {
         val priceString = "$price#$mrp"
         return Data3simple(catId, image, productName, quantity = 0, priceString)
     }

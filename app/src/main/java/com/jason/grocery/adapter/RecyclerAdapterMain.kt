@@ -27,7 +27,7 @@ class RecyclerAdapterMain(var callback: ClickCallBack, var mList: ArrayList<Data
         }
     }
 
-    interface ClickCallBack{
+    interface ClickCallBack {
         fun onItemClick(catId: Int, count: Int, categoryName: String)
     }
 
@@ -39,7 +39,6 @@ class RecyclerAdapterMain(var callback: ClickCallBack, var mList: ArrayList<Data
             .inflate(R.layout.recycler_adapter_category, parent, false)
         return MyViewHolder(view)
     }
-
 
 
     override fun getItemCount(): Int {

@@ -35,10 +35,11 @@ class RecyclerAdapterCart(
             itemView.text_product2_title.text = data.productName
             data.getRealPrice()
             val priText = ((data.priceNumber)?.times(1)).toString() + " $"
-            val mrpText = (data.mrpNumber).toString() + "$" + "  save ${(data.mrpNumber as Double - data.priceNumber!!)}$"
+            val mrpText =
+                (data.mrpNumber).toString() + "$" + "  save ${(data.mrpNumber as Double - data.priceNumber!!)}$"
             val ss2 = SpannableString(mrpText)
             val index1 = mrpText.indexOf("save")
-            ss2.setSpan(StrikethroughSpan(), 0, index1 - 2 , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            ss2.setSpan(StrikethroughSpan(), 0, index1 - 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             ss2.setSpan(ForegroundColorSpan(Color.RED), index1, ss2.length, 0)
             ss2.setSpan(StyleSpan(Typeface.ITALIC), index1, ss2.length, 0)
             ss2.setSpan(RelativeSizeSpan(0.8f), index1, ss2.length, 0)
@@ -81,7 +82,7 @@ class RecyclerAdapterCart(
         return mList.size
     }
 
-    fun getItem(position: Int): Data3simple{
+    fun getItem(position: Int): Data3simple {
         return mList[position]
     }
 }

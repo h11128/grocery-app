@@ -16,7 +16,8 @@ const val key_orderSummary = "key_order"
 
 class SessionManager(mContext: Context) {
 
-    private val sharedPreferences: SharedPreferences = mContext.getSharedPreferences("userdata", Context.MODE_PRIVATE)
+    private val sharedPreferences: SharedPreferences =
+        mContext.getSharedPreferences("userdata", Context.MODE_PRIVATE)
     var isLogin: Boolean = sharedPreferences.getBoolean(key_login, false)
     var queue: RequestQueue = Volley.newRequestQueue(mContext)
 
@@ -27,7 +28,7 @@ class SessionManager(mContext: Context) {
         }
     }
 
-    fun loginData(username: String, userId:String, mobile:String) {
+    fun loginData(username: String, userId: String, mobile: String) {
         with(sharedPreferences.edit()) {
             putString(key_name, username)
             putString(key_id, userId)
@@ -55,9 +56,6 @@ class SessionManager(mContext: Context) {
             apply()
         }
     }
-
-
-
 
 
 }

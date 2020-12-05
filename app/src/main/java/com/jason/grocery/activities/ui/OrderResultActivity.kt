@@ -72,7 +72,6 @@ class OrderResultActivity : AppCompatActivity() {
     }
 
 
-
     private fun init() {
         getOrderOnline()
         text_order_result.text = "order submit fail ${intent.getStringExtra("result")}"
@@ -80,25 +79,26 @@ class OrderResultActivity : AppCompatActivity() {
 
     private fun getOrderOnline() {
         val queue = Volley.newRequestQueue(applicationContext)
-        val jsonObjectRequest = StringRequest(Request.Method.GET, url_order + "/${SessionManager(this).getUserId()}", {
-            val data = JSONObject(it).get("data") as JSONArray
-            for (index in 0 until data.length()){
-                val te = Gson().fromJson(data.get(index).toString(), Order::class.java)
-                if (te._id == intent.getStringExtra("orderId")){
-                    orderStatus = true
-                    text_order_result.text = "success: ${Gson().toJson(te)}"
+        val jsonObjectRequest =
+            StringRequest(Request.Method.GET, url_order + "/${SessionManager(this).getUserId()}", {
+                val data = JSONObject(it).get("data") as JSONArray
+                for (index in 0 until data.length()) {
+                    val te = Gson().fromJson(data.get(index).toString(), Order::class.java)
+                    if (te._id == intent.getStringExtra("orderId")) {
+                        orderStatus = true
+                        text_order_result.text = "success: ${Gson().toJson(te)}"
 
+                    }
+                    orderList.add(te)
                 }
-                orderList.add(te)
-            }
 
-        }, {
-            Log.d("error", it.toString())
-            Log.d("error", "${ParseError(it).stackTrace}")
-            Log.d("error", "${it.message}")
-            Log.d("error", "${it.networkResponse.statusCode}")
-            Toast.makeText(this, "error $it", Toast.LENGTH_SHORT).show()
-        })
+            }, {
+                Log.d("error", it.toString())
+                Log.d("error", "${ParseError(it).stackTrace}")
+                Log.d("error", "${it.message}")
+                Log.d("error", "${it.networkResponse.statusCode}")
+                Toast.makeText(this, "error $it", Toast.LENGTH_SHORT).show()
+            })
         queue.add(jsonObjectRequest)
     }
 

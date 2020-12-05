@@ -32,13 +32,22 @@ class EditAddressFragment : Fragment() {
             val type = edit_address_type.text.toString()
             val streetName = edit_address_streetName.text.toString()
             val username = SessionManager(mContext).getUserId()
-            val address = Address(dataList.size,dataList.size.toString(),city,houseNo, pincode, streetName,type,username)
+            val address = Address(
+                dataList.size,
+                dataList.size.toString(),
+                city,
+                houseNo,
+                pincode,
+                streetName,
+                type,
+                username
+            )
             dataList.add(address)
             callback?.editAddressCallback(address)
         }
     }
 
-    interface PassAddress{
+    interface PassAddress {
         fun editAddressCallback(data: Address)
     }
 

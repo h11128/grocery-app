@@ -55,8 +55,11 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
         title = "Shopping Cart"
         button_check_out.setOnClickListener {
             Log.d("abc", "orderSummary when checkout $orderSummary")
-            val intent = Intent(this, AddressActivity::class.java).apply { putExtra(
-                KEY_OrderSummary, orderSummary) }
+            val intent = Intent(this, AddressActivity::class.java).apply {
+                putExtra(
+                    KEY_OrderSummary, orderSummary
+                )
+            }
             startActivityForResult(intent, 0)
             refresh()
         }
@@ -67,7 +70,7 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
         refresh()
     }
 
-    private fun initSwipe(){
+    private fun initSwipe() {
         val simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object :
             ItemTouchHelper.SimpleCallback(
                 0,
@@ -89,7 +92,11 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
                 val position = viewHolder.adapterPosition
                 val data = adapter.getItem(position)
                 dbHelper.delete(data)
-                Toast.makeText(this@CartActivity, "delete data ${data.productName} ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@CartActivity,
+                    "delete data ${data.productName} ",
+                    Toast.LENGTH_SHORT
+                ).show()
                 refresh()
             }
         }
@@ -150,7 +157,7 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
         calculate()
         switchItemUI(subTotal > 0.0)
         Log.d("abc", "refresh adapter")
-        Log.d("abc","current product ${dbHelper.readAll().toArray()}")
+        Log.d("abc", "current product ${dbHelper.readAll().toArray()}")
     }
 
     override fun changeQuantity(data: Data3simple, operation: Int) {
@@ -187,27 +194,38 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
             "0 $"
         }
         val ss1 = SpannableString(disText)
-        ss1.setSpan(ForegroundColorSpan(Color.RED), 0, ss1.length , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        ss1.setSpan(ForegroundColorSpan(Color.RED), 0, ss1.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         val ss2 = SpannableString(priText)
-        ss2.setSpan(ForegroundColorSpan(getColor(R.color.darkGreen)), 0, ss2.length , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        ss2.setSpan(
+            ForegroundColorSpan(getColor(R.color.darkGreen)),
+            0,
+            ss2.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
 
         text_sub_total.text = subText
         text_discount.text = ss1
         text_price_total.text = ss2
-        orderSummary = OrderSummary("a", 30, discountTotal, data3simpleList.size, subTotal - discountTotal, amountTotal)
+        orderSummary = OrderSummary(
+            "a",
+            30,
+            discountTotal,
+            data3simpleList.size,
+            subTotal - discountTotal,
+            amountTotal
+        )
     }
 
-    private fun switchItemUI(newStatus: Boolean){
+    private fun switchItemUI(newStatus: Boolean) {
         Log.d("abc", "switch UI $newStatus")
 
-        if (newStatus != cartStatus){
-            if(newStatus){
+        if (newStatus != cartStatus) {
+            if (newStatus) {
                 recycler_view_cart.visibility = View.VISIBLE
                 view_price_info.visibility = View.VISIBLE
                 button_check_out.visibility = View.VISIBLE
                 text_no_item_in_cart.visibility = View.GONE
-            }
-            else{
+            } else {
                 recycler_view_cart.visibility = View.GONE
                 view_price_info.visibility = View.GONE
                 button_check_out.visibility = View.GONE
@@ -217,14 +235,14 @@ class CartActivity : AppCompatActivity(), RecyclerAdapterCart.CallBack {
         }
         updateQuantity()
     }
+
     private fun updateQuantity() {
         val totalCount = dbHelper.countAll()
         Log.d("abc", "total count in $totalCount")
-        if (totalCount <= 0){
+        if (totalCount <= 0) {
             textViewInsideCart?.visibility = View.GONE
 
-        }
-        else{
+        } else {
             textViewInsideCart?.visibility = View.VISIBLE
             textViewInsideCart?.text = totalCount.toString()
         }

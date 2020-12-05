@@ -89,11 +89,10 @@ class AddressActivity : AppCompatActivity(), EditAddressFragment.PassAddress {
     private fun updateQuantity() {
         val totalCount = dbHelper.countAll()
         Log.d("abc", "total count in $totalCount")
-        if (totalCount <= 0){
+        if (totalCount <= 0) {
             textViewInsideCart?.visibility = View.GONE
 
-        }
-        else{
+        } else {
             textViewInsideCart?.visibility = View.VISIBLE
             textViewInsideCart?.text = totalCount.toString()
         }
@@ -148,17 +147,18 @@ class AddressActivity : AppCompatActivity(), EditAddressFragment.PassAddress {
         sendData["userId"] = data.userId
 
         val sendDataObject = JSONObject(sendData as Map<*, *>)
-        val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url_address, sendDataObject, {
-            Log.d("success", "post address success")
+        val jsonObjectRequest =
+            JsonObjectRequest(Request.Method.POST, url_address, sendDataObject, {
+                Log.d("success", "post address success")
 
 
-        }, {
-            Log.d("error", it.toString())
-            Log.d("error", "${ParseError(it).stackTrace}")
-            Log.d("error", "${it.message}")
-            Log.d("error", "${it.networkResponse.statusCode}")
-            Toast.makeText(this, "error $it", Toast.LENGTH_SHORT).show()
-        })
+            }, {
+                Log.d("error", it.toString())
+                Log.d("error", "${ParseError(it).stackTrace}")
+                Log.d("error", "${it.message}")
+                Log.d("error", "${it.networkResponse.statusCode}")
+                Toast.makeText(this, "error $it", Toast.LENGTH_SHORT).show()
+            })
         queue.add(jsonObjectRequest)
     }
 

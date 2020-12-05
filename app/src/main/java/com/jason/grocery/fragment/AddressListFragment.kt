@@ -26,11 +26,11 @@ class AddressListFragment : Fragment(), RecyclerAdapterAddress.OnItemClick {
     lateinit var adapter: RecyclerAdapterAddress
     var orderSummary: OrderSummary? = null
     var dataList: ArrayList<Address> = arrayListOf(
-        Address(1,"1","1","1",1,"1","1","1")
+        Address(1, "1", "1", "1", 1, "1", "1", "1")
 
     )
 
-    fun refreshDataList(addressList: ArrayList<Address>){
+    fun refreshDataList(addressList: ArrayList<Address>) {
         dataList = addressList
         Log.d("abc", "refreshDataList in fragment")
 
@@ -40,7 +40,7 @@ class AddressListFragment : Fragment(), RecyclerAdapterAddress.OnItemClick {
 
     private fun init(view: View) {
         Log.d("abc", "dataList size pass into adapter ${dataList.size}")
-        adapter = RecyclerAdapterAddress(this,  dataList).apply {
+        adapter = RecyclerAdapterAddress(this, dataList).apply {
             userName = sessionManager.getUserName()
         }
         view.recycler_view_address.adapter = adapter
@@ -79,8 +79,8 @@ class AddressListFragment : Fragment(), RecyclerAdapterAddress.OnItemClick {
     }
 
     override fun clickCallback(data: Address) {
-        val intent = Intent(activity, PaymentActivity::class.java).apply{
-            Log.d("abc","orderSummary $orderSummary when click on address $data" )
+        val intent = Intent(activity, PaymentActivity::class.java).apply {
+            Log.d("abc", "orderSummary $orderSummary when click on address $data")
             putExtra(KEY_Address, data)
 
             putExtra(key_orderSummary, orderSummary)

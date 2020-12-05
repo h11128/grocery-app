@@ -97,14 +97,14 @@ class SubFragment : Fragment(), RecyclerAdapterSub.Callback {
 
     override fun changeQuantity(data: Data3simple, operation: Int): Data3simple? {
         quantityCallBack?.updateQuantity()
-        return if (operation == 0){
+        return if (operation == 0) {
             dbHelper.read(data)
-        } else{
+        } else {
             dbHelper.changeQuantity(data, operation)
         }
     }
 
-    interface QuantityCallBack{
+    interface QuantityCallBack {
         fun updateQuantity()
     }
 

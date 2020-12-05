@@ -9,4 +9,4 @@ data class OrderSummary(
     val orderAmount: Int,
     val ourPrice: Double,
     val totalAmount: Int
-):Serializable
+) : Serializable

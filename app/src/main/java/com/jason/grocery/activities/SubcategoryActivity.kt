@@ -146,11 +146,10 @@ class SubcategoryActivity : AppCompatActivity(), SubFragment.QuantityCallBack {
     override fun updateQuantity() {
         val totalCount = dbHelper.countAll()
         Log.d("abc", "total count in $totalCount")
-        if (totalCount <= 0){
+        if (totalCount <= 0) {
             textViewInsideCart?.visibility = View.GONE
 
-        }
-        else{
+        } else {
             textViewInsideCart?.visibility = View.VISIBLE
             textViewInsideCart?.text = totalCount.toString()
         }

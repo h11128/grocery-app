@@ -155,37 +155,37 @@ class ProductActivity : AppCompatActivity() {
 
 
     private fun checkStatus(): Boolean {
-        return simpleData!= null && simpleData!!.quantity >0
+        return simpleData != null && simpleData!!.quantity > 0
     }
 
-    private fun showToast(mode: Int){
+    private fun showToast(mode: Int) {
         var showText: String
-        showText = "Add ${simpleData?.productName} to cart!\nCurrent Quantity: ${simpleData?.quantity}"
+        showText =
+            "Add ${simpleData?.productName} to cart!\nCurrent Quantity: ${simpleData?.quantity}"
 
-        if (mode == 1){
-            showText = if (checkStatus()){
+        if (mode == 1) {
+            showText = if (checkStatus()) {
                 "Add ${simpleData?.productName} to cart!\nCurrent Quantity: ${simpleData?.quantity}"
-            } else{
+            } else {
                 "Delete ${productData.productName} to cart!"
             }
         }
 
         myToast.cancel()
         myToast = Toast.makeText(applicationContext, showText, Toast.LENGTH_SHORT)
-        myToast.setGravity(Gravity.CENTER , 0, 200)
+        myToast.setGravity(Gravity.CENTER, 0, 200)
         myToast.duration = Toast.LENGTH_SHORT
         myToast.show()
     }
 
-    private fun switchCartUI(newStatus: Boolean){
+    private fun switchCartUI(newStatus: Boolean) {
         Log.d("abc", "switch Cart UI $newStatus")
-        if(newStatus){
+        if (newStatus) {
             button_add_cart.visibility = View.GONE
             button_add_quantity.visibility = View.VISIBLE
             button_minus_quantity.visibility = View.VISIBLE
             text_Inside.visibility = View.VISIBLE
-        }
-        else{
+        } else {
             button_add_cart.visibility = View.VISIBLE
             button_add_quantity.visibility = View.GONE
             button_minus_quantity.visibility = View.GONE
@@ -196,14 +196,14 @@ class ProductActivity : AppCompatActivity() {
 
 
     }
+
     private fun updateQuantity() {
         val totalCount = dbHelper.countAll()
         Log.d("abc", "total count in $totalCount")
-        if (totalCount <= 0){
+        if (totalCount <= 0) {
             textViewInsideCart?.visibility = View.GONE
 
-        }
-        else{
+        } else {
             textViewInsideCart?.visibility = View.VISIBLE
             textViewInsideCart?.text = totalCount.toString()
         }

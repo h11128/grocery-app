@@ -17,6 +17,7 @@ class RecyclerAdapterAddress(
     RecyclerView.Adapter<RecyclerAdapterAddress.MyViewHolder>() {
     private var callback: OnItemClick? = null
     var userName = ""
+
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(data: Address) {
             Log.d("bind", "$data")
@@ -32,8 +33,7 @@ class RecyclerAdapterAddress(
     }
 
 
-
-    interface OnItemClick{
+    interface OnItemClick {
         fun clickCallback(data: Address)
     }
 
@@ -59,7 +59,7 @@ class RecyclerAdapterAddress(
         return mList.size
     }
 
-    fun getItem(position: Int): Address{
+    fun getItem(position: Int): Address {
         return mList[position]
     }
 }
